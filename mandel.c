@@ -92,9 +92,6 @@ int main( int argc, char *argv[] )
 	return 0;
 }
 
-
-
-
 /*
 Return the number of iterations at point x, y
 in the Mandelbrot space, up to a maximum of max.
