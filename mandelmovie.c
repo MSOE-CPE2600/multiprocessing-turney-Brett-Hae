@@ -14,13 +14,20 @@
 int main(int argc, char *argv[]) {
     int frames = 50;
     int max = 1;
+    int thread = 1;
     int children = 0;
     float scale = 8;
 
     // Parse input for number of processors
     int num = atoi(argv[1]);
-    if(argc > 1 || num > 0) {
+    if(argc > 1 && num > 0) {
         max = num;
+    }
+
+    // Parse input for number of threads
+    int num2 = atoi(argv[2]);
+    if(argc > 2 && num2 >= 1 && num2 <= 20) {
+        thread = num2;
     }
 
     for(int i=0; i<frames; i++) {
@@ -38,12 +45,16 @@ int main(int argc, char *argv[]) {
             char filename[100];
             snprintf(filename, sizeof(filename), "mandel%d.jpg", i);
 
+            // Create thread input
+            char th[10];
+            snprintf(th, sizeof(th), "%d", thread);
+
             // Calculate scalar
             char nextScale[20];
             snprintf(nextScale, sizeof(nextScale), "%.2f", currentScale);
 
             // Call executable file with desired parameters
-            execl("./mandel", "mandel", "-o", filename, "-s", nextScale, NULL);
+            execl("./mandel", "mandel", "-o", filename, "-t", th, "-s", nextScale, NULL);
         } else { // Parent process
             children++;
         }

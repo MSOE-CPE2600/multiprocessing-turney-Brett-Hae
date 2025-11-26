@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -c -Wall -g
-LDFLAGS = -ljpeg
+LDFLAGS = -ljpeg -lpthread
 
 # Executables
 EXEC1 = mandel
